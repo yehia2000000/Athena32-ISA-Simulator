@@ -1,0 +1,896 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1017</width>
+    <height>881</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* ============================================================
+   Dark theme — drop-in for Qt Designer
+   Paste on the QMainWindow (or the top-level form), nothing else
+   to configure. Styles by widget class only, so it applies the
+   moment you press OK.
+
+   Containers: use QGroupBox for panes, or set any QFrame's
+   frameShape to StyledPanel and it picks up the card look.
+   ============================================================ */
+
+QWidget {
+    background-color: #161614;
+    color: #EDEBE3;
+}
+
+QLabel,
+QCheckBox,
+QRadioButton,
+QGroupBox::title,
+QTabBar,
+QToolBar QLabel {
+    background: transparent;
+}
+
+QToolTip {
+    background-color: #2B2B28;
+    color: #EDEBE3;
+    border: 1px solid #3A3A35;
+    border-radius: 6px;
+    padding: 4px 8px;
+}
+
+/* ---------- panes ---------- */
+
+QGroupBox {
+    background-color: #21211F;
+    border: 1px solid #3A3A35;
+    border-radius: 10px;
+    margin-top: 16px;
+    padding: 12px 10px 10px 10px;
+    font-size: 12px;
+    color: #A8A69C;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left: 12px;
+    padding: 0 4px;
+}
+
+QFrame[frameShape=&quot;6&quot;] {
+    background-color: #21211F;
+    border: 1px solid #3A3A35;
+    border-radius: 10px;
+}
+
+QFrame[frameShape=&quot;4&quot;],
+QFrame[frameShape=&quot;5&quot;] {
+    background-color: #3A3A35;
+    border: none;
+    max-height: 1px;
+}
+
+/* ---------- buttons ---------- */
+
+QPushButton {
+    background-color: #2B2B28;
+    color: #EDEBE3;
+    border: 1px solid #4A4A44;
+    border-radius: 8px;
+    padding: 7px 14px;
+    min-height: 20px;
+}
+
+QPushButton:hover    { background-color: #33332F; border-color: #5C5C55; }
+QPushButton:pressed  { background-color: #3A3A35; }
+QPushButton:checked  { background-color: #0C447C; color: #85B7EB; border-color: #2F6FB5; }
+QPushButton:default  { border-color: #2F6FB5; }
+QPushButton:disabled { background-color: #1F1F1D; color: #5A5952; border-color: #2E2E2A; }
+
+QToolButton {
+    background-color: transparent;
+    color: #EDEBE3;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 5px;
+}
+
+QToolButton:hover   { background-color: #2B2B28; border-color: #3A3A35; }
+QToolButton:pressed { background-color: #33332F; }
+QToolButton:checked { background-color: #0C447C; color: #85B7EB; }
+
+QToolBar {
+    background-color: #1C1C1A;
+    border: none;
+    border-bottom: 1px solid #3A3A35;
+    spacing: 6px;
+    padding: 6px 8px;
+}
+
+QToolBar::separator {
+    background-color: #3A3A35;
+    width: 1px;
+    margin: 4px 6px;
+}
+
+/* ---------- text and code views ---------- */
+
+QPlainTextEdit,
+QTextEdit,
+QTextBrowser {
+    background-color: #1B1B19;
+    color: #D9D6CC;
+    border: 1px solid #3A3A35;
+    border-radius: 8px;
+    padding: 8px;
+    font-family: &quot;Cascadia Mono&quot;, &quot;Consolas&quot;, &quot;DejaVu Sans Mono&quot;, monospace;
+    font-size: 12px;
+    selection-background-color: #0C447C;
+    selection-color: #E6F1FB;
+}
+
+QPlainTextEdit:focus,
+QTextEdit:focus { border-color: #2F6FB5; }
+
+/* ---------- tables and lists ---------- */
+
+QTableView,
+QTableWidget,
+QTreeView,
+QTreeWidget,
+QListView,
+QListWidget {
+    background-color: #1B1B19;
+    alternate-background-color: #21211F;
+    color: #D9D6CC;
+    border: 1px solid #3A3A35;
+    border-radius: 8px;
+    gridline-color: #2E2E2A;
+    font-family: &quot;Cascadia Mono&quot;, &quot;Consolas&quot;, &quot;DejaVu Sans Mono&quot;, monospace;
+    font-size: 12px;
+    outline: none;
+}
+
+QTableView::item,
+QTreeView::item,
+QListView::item {
+    padding: 4px 6px;
+    border: none;
+}
+
+QTableView::item:selected,
+QTreeView::item:selected,
+QListView::item:selected {
+    background-color: #0C447C;
+    color: #E6F1FB;
+}
+
+QTableView::item:hover,
+QTreeView::item:hover,
+QListView::item:hover {
+    background-color: #26262D;
+}
+
+QHeaderView { background-color: #21211F; border: none; }
+
+QHeaderView::section {
+    background-color: #21211F;
+    color: #78766E;
+    border: none;
+    border-bottom: 1px solid #3A3A35;
+    border-right: 1px solid #2E2E2A;
+    padding: 6px 8px;
+    font-family: &quot;Segoe UI&quot;, &quot;Inter&quot;, sans-serif;
+    font-size: 11px;
+}
+
+QTableCornerButton::section {
+    background-color: #21211F;
+    border: none;
+    border-bottom: 1px solid #3A3A35;
+}
+
+/* ---------- inputs ---------- */
+
+QLineEdit,
+QSpinBox,
+QDoubleSpinBox,
+QComboBox {
+    background-color: #1B1B19;
+    color: #EDEBE3;
+    border: 1px solid #4A4A44;
+    border-radius: 8px;
+    padding: 6px 10px;
+    min-height: 20px;
+    selection-background-color: #0C447C;
+}
+
+QLineEdit:focus,
+QSpinBox:focus,
+QDoubleSpinBox:focus,
+QComboBox:focus { border-color: #2F6FB5; }
+
+QLineEdit:disabled,
+QComboBox:disabled { color: #5A5952; border-color: #2E2E2A; }
+
+QComboBox::drop-down { border: none; width: 22px; }
+
+QComboBox QAbstractItemView {
+    background-color: #2B2B28;
+    color: #EDEBE3;
+    border: 1px solid #3A3A35;
+    border-radius: 8px;
+    selection-background-color: #0C447C;
+    padding: 4px;
+}
+
+QSpinBox::up-button,
+QSpinBox::down-button,
+QDoubleSpinBox::up-button,
+QDoubleSpinBox::down-button {
+    background-color: #2B2B28;
+    border: none;
+    width: 16px;
+}
+
+QCheckBox,
+QRadioButton { color: #D9D6CC; spacing: 8px; }
+
+QCheckBox::indicator,
+QRadioButton::indicator {
+    width: 15px;
+    height: 15px;
+    border: 1px solid #4A4A44;
+    background-color: #1B1B19;
+}
+
+QCheckBox::indicator   { border-radius: 4px; }
+QRadioButton::indicator { border-radius: 8px; }
+
+QCheckBox::indicator:checked,
+QRadioButton::indicator:checked {
+    background-color: #2F6FB5;
+    border-color: #2F6FB5;
+}
+
+/* ---------- scrollbars ---------- */
+
+QScrollBar:vertical {
+    background: transparent;
+    width: 10px;
+    margin: 2px;
+}
+
+QScrollBar::handle:vertical {
+    background: #3A3A35;
+    border-radius: 5px;
+    min-height: 28px;
+}
+
+QScrollBar::handle:vertical:hover { background: #4F4F48; }
+
+QScrollBar:horizontal {
+    background: transparent;
+    height: 10px;
+    margin: 2px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #3A3A35;
+    border-radius: 5px;
+    min-width: 28px;
+}
+
+QScrollBar::handle:horizontal:hover { background: #4F4F48; }
+
+QScrollBar::add-line,
+QScrollBar::sub-line,
+QScrollBar::add-page,
+QScrollBar::sub-page {
+    background: none;
+    border: none;
+    height: 0;
+    width: 0;
+}
+
+/* ---------- tabs, splitter, menus, status ---------- */
+
+QTabWidget::pane {
+    background-color: #21211F;
+    border: 1px solid #3A3A35;
+    border-radius: 10px;
+    top: -1px;
+}
+
+QTabBar::tab {
+    background-color: transparent;
+    color: #78766E;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 6px 14px;
+    margin-right: 4px;
+    font-size: 12px;
+}
+
+QTabBar::tab:hover    { color: #D9D6CC; background-color: #2B2B28; }
+QTabBar::tab:selected { color: #85B7EB; background-color: #0C447C; border-color: #2F6FB5; }
+
+QSplitter::handle { background-color: #161614; }
+QSplitter::handle:horizontal { width: 6px; }
+QSplitter::handle:vertical   { height: 6px; }
+QSplitter::handle:hover      { background-color: #2F6FB5; }
+
+QMenuBar {
+    background-color: #1C1C1A;
+    border-bottom: 1px solid #3A3A35;
+    padding: 2px 4px;
+}
+
+QMenuBar::item {
+    background: transparent;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+QMenuBar::item:selected { background-color: #2B2B28; }
+
+QMenu {
+    background-color: #2B2B28;
+    border: 1px solid #3A3A35;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+QMenu::item { padding: 6px 22px 6px 12px; border-radius: 6px; }
+QMenu::item:selected { background-color: #0C447C; color: #85B7EB; }
+QMenu::separator { height: 1px; background: #3A3A35; margin: 4px 8px; }
+
+QStatusBar {
+    background-color: #1C1C1A;
+    border-top: 1px solid #3A3A35;
+    color: #A8A69C;
+    font-family: &quot;Cascadia Mono&quot;, &quot;Consolas&quot;, monospace;
+    font-size: 11px;
+}
+
+QStatusBar::item { border: none; }
+
+QProgressBar {
+    background-color: #1B1B19;
+    border: 1px solid #3A3A35;
+    border-radius: 6px;
+    height: 8px;
+    text-align: center;
+    color: #A8A69C;
+}
+
+QProgressBar::chunk { background-color: #2F6FB5; border-radius: 5px; }
+
+QDockWidget { color: #A8A69C; }
+
+QDockWidget::title {
+    background-color: #1C1C1A;
+    border-bottom: 1px solid #3A3A35;
+    padding: 6px 10px;
+    text-align: left;
+}
+
+/* ---------- optional: accent button ----------
+   Ignored unless a QPushButton has objectName runBtn.
+   -------------------------------------------- */
+
+QPushButton#runBtn {
+    background-color: #0C447C;
+    color: #C7DFF7;
+    border: 1px solid #2F6FB5;
+}
+
+QPushButton#runBtn:hover   { background-color: #10538F; }
+QPushButton#runBtn:pressed { background-color: #0A3B6B; }
+</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_5">
+   <item>
+    <widget class="QFrame" name="frame">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QFrame" name="frame_2">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>170</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QFrame" name="frame_4">
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../assets/resource.qrc">:/image/si_vision.png</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_5">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="font">
+               <font>
+                <family>Segoe UI,Inter,Noto Sans,sans-serif</family>
+                <pointsize>22</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Athena32 ISA Simulator</string>
+              </property>
+              <property name="textFormat">
+               <enum>Qt::AutoText</enum>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_6">
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../assets/resource.qrc">:/image/si_vision.png</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="frame_3">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QFrame" name="frame_7">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_13">
+            <item>
+             <widget class="QFrame" name="frame_15">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_14">
+               <item>
+                <widget class="QFrame" name="frame_19">
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Fetch</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_16">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_15">
+               <item>
+                <widget class="QFrame" name="frame_20">
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_2">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Decode</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_17">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_16">
+               <item>
+                <widget class="QFrame" name="frame_21">
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_3">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Deassemble</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_18">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_17">
+               <item>
+                <widget class="QFrame" name="frame_22">
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_4">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Execute</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_8">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_6">
+            <item>
+             <widget class="QFrame" name="frame_9">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>45</height>
+               </size>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_7">
+               <item>
+                <widget class="QLabel" name="label_4">
+                 <property name="font">
+                  <font>
+                   <pointsize>11</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Instruction Memory</string>
+                 </property>
+                 <property name="scaledContents">
+                  <bool>true</bool>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_14">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_8"/>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_10">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_9">
+               <item>
+                <widget class="QLabel" name="label_10">
+                 <property name="font">
+                  <font>
+                   <pointsize>11</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Data Memory</string>
+                 </property>
+                 <property name="scaledContents">
+                  <bool>true</bool>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_11">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_10">
+               <item>
+                <widget class="QLabel" name="label_7">
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_13">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_11">
+               <item>
+                <widget class="QLabel" name="label_8">
+                 <property name="font">
+                  <font>
+                   <pointsize>11</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Register File</string>
+                 </property>
+                 <property name="scaledContents">
+                  <bool>true</bool>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_12">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_12">
+               <item>
+                <widget class="QLabel" name="label_9">
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../assets/resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>

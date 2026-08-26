@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="image">
+    <file>si_vision.png</file>
+  </qresource>
+</RCC>
