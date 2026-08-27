@@ -2,6 +2,8 @@
 #include <array>
 #include  "../include/decode_stage.hpp"
 #include "../include/STD_TYPES.h"
+#include "../include/memory.hpp"
+
 DecodedInstr decode_stage::decode (int instruction ) {
     DecodedInstr decoded_instr ; 
     decoded_instr.opcode = (instruction>>26)&0x3F ; 
