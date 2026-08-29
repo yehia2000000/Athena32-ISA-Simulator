@@ -25,7 +25,7 @@ STATE Executer::ExecuteStage (DecodedInstr decode_instr , DataMem *Dmem ,Registe
             local_rt = (*Rmem).getRegister(decode_instr.rt); 
             local_rd = local_rs + local_rt ; 
             (*Rmem).setRegister(decode_instr.rd , local_rd); 
-
+            Ex_state = STATE::DONE ;
             break ; 
 
             case (int)FUNC_R_TYPE::SUB : 
@@ -33,6 +33,7 @@ STATE Executer::ExecuteStage (DecodedInstr decode_instr , DataMem *Dmem ,Registe
             local_rt = (*Rmem).getRegister(decode_instr.rt); 
             local_rd = local_rs - local_rt ; 
             (*Rmem).setRegister(decode_instr.rd , local_rd); 
+            Ex_state = STATE::DONE ;
             break; 
 
             case (int)FUNC_R_TYPE::AND : 
@@ -40,6 +41,7 @@ STATE Executer::ExecuteStage (DecodedInstr decode_instr , DataMem *Dmem ,Registe
             local_rt = (*Rmem).getRegister(decode_instr.rt); 
             local_rd = local_rs & local_rt ; 
             (*Rmem).setRegister(decode_instr.rd , local_rd); 
+            Ex_state = STATE::DONE ;
             break ; 
 
             case (int)FUNC_R_TYPE::OR : 
@@ -47,6 +49,7 @@ STATE Executer::ExecuteStage (DecodedInstr decode_instr , DataMem *Dmem ,Registe
             local_rt = (*Rmem).getRegister(decode_instr.rt); 
             local_rd = local_rs | local_rt ; 
             (*Rmem).setRegister(decode_instr.rd , local_rd); 
+            Ex_state = STATE::DONE ;
             break ; 
 
             case (int)FUNC_R_TYPE::SLT : 
@@ -54,6 +57,7 @@ STATE Executer::ExecuteStage (DecodedInstr decode_instr , DataMem *Dmem ,Registe
             local_rt = (*Rmem).getRegister(decode_instr.rt); 
             local_rd = (local_rs > local_rt) ; 
             (*Rmem).setRegister(decode_instr.rd , local_rd); 
+            Ex_state = STATE::DONE ;
             break ; 
 
         }
@@ -65,18 +69,21 @@ STATE Executer::ExecuteStage (DecodedInstr decode_instr , DataMem *Dmem ,Registe
             local_rs = (*Rmem).getRegister(decode_instr.rs); 
             local_rd = local_rs + Executer::SignExtend(decode_instr.imm,18) ; 
             (*Rmem).setRegister(decode_instr.rd , local_rd); 
+            Ex_state = STATE::DONE ;
             break ; 
 
             case (int)FUNC_I_TYPE::ANDI: 
             local_rs = (*Rmem).getRegister(decode_instr.rs); 
             local_rd = local_rs & Executer::SignExtend(decode_instr.imm,18) ; 
             (*Rmem).setRegister(decode_instr.rd , local_rd); 
+            Ex_state = STATE::DONE ;
             break; 
 
             case (int)FUNC_I_TYPE::ORI: 
             local_rs = (*Rmem).getRegister(decode_instr.rs); 
             local_rd = local_rs | Executer::SignExtend(decode_instr.imm,18) ; 
             (*Rmem).setRegister(decode_instr.rd , local_rd); 
+            Ex_state = STATE::DONE ;
             break; 
 
             case (int)FUNC_I_TYPE::LW: 
@@ -84,6 +91,7 @@ STATE Executer::ExecuteStage (DecodedInstr decode_instr , DataMem *Dmem ,Registe
             local_off = (decode_instr.imm) * 4  ; 
             local_data = (*Dmem).getData(local_rs+local_off) ; 
             (*Rmem).setRegister(decode_instr.rd , local_data); 
+            Ex_state = STATE::DONE ;
             break; 
 
             case (int)FUNC_I_TYPE::SW: 
@@ -91,12 +99,14 @@ STATE Executer::ExecuteStage (DecodedInstr decode_instr , DataMem *Dmem ,Registe
             local_rs = (*Rmem).getRegister(decode_instr.rs); 
             local_off = (decode_instr.imm) *4  ; 
             (*Dmem).setData (local_rs+local_off , local_data) ; 
+            Ex_state = STATE::DONE ;
             break; 
 
             case  (int)FUNC_I_TYPE::SLTI : 
             local_rs = (*Rmem).getRegister(decode_instr.rs); 
             local_rd = (local_rs > Executer::SignExtend(local_rs,18)) ; 
             (*Rmem).setRegister(decode_instr.rd , local_rd); 
+            Ex_state = STATE::DONE ;
             break ; 
 
             case  (int)FUNC_I_TYPE::BEQ : 
@@ -107,8 +117,9 @@ STATE Executer::ExecuteStage (DecodedInstr decode_instr , DataMem *Dmem ,Registe
                 *pc = (*pc + 1) + Executer::SignExtend(decode_instr.imm,18);
             }
             else {
-                *pc = (*pc + 1) ; 
+                *pc = (*pc + 1) ;
             }
+            Ex_state = STATE::DONE ;
             break ; 
 
         }
@@ -117,6 +128,7 @@ STATE Executer::ExecuteStage (DecodedInstr decode_instr , DataMem *Dmem ,Registe
     else if  ((decode_instr.opcode== (int)Op_type:: J_TYPE )){
         *pc = (*pc + 1) + Executer::SignExtend(decode_instr.target,23);
         (*Rmem).setRegister(decode_instr.rd , *pc);
+        Ex_state = STATE::DONE ;
 
     }
     else{
@@ -126,19 +138,35 @@ STATE Executer::ExecuteStage (DecodedInstr decode_instr , DataMem *Dmem ,Registe
             local_rt = (*Rmem).getRegister(decode_instr.rt); 
             local_rd = (local_rs * local_rt)& 0xFFFFFFFF ; 
             (*Rmem).setRegister(decode_instr.rd , local_rd); 
+            Ex_state = STATE::DONE ;
             break ; 
 
             case (int)FUNC_EX_TYPE::DIV : 
             local_rs = (*Rmem).getRegister(decode_instr.rs); 
             local_rt = (*Rmem).getRegister(decode_instr.rt); 
-            local_rd = local_rs / local_rt ; 
+            if (local_rt == 0){
+                Ex_state = STATE::DIV_BY_0 ; 
+                local_rd = -1 ; 
+            }
+            else {
+                local_rd = local_rs / local_rt ; 
+                Ex_state = STATE::DONE ;
+            }
             (*Rmem).setRegister(decode_instr.rd , local_rd); 
             break ; 
 
             case (int)FUNC_EX_TYPE::REM : 
             local_rs = (*Rmem).getRegister(decode_instr.rs); 
-            local_rt = (*Rmem).getRegister(decode_instr.rt); 
-            local_rd = local_rs % local_rt ; 
+            local_rt = (*Rmem).getRegister(decode_instr.rt);
+            if (local_rt == 0 )
+            {
+                local_rd = local_rs ; 
+                Ex_state = STATE::DIV_BY_0 ; 
+            } 
+            else {
+                local_rd = local_rs % local_rt ; 
+                Ex_state = STATE::DONE ;
+            }
             (*Rmem).setRegister(decode_instr.rd , local_rd); 
             break ; 
 
