@@ -2,18 +2,21 @@
 #include "../include/memory.hpp" 
 
 
-InstructionMem :: InstructionMem (std::vector<int> local_mem) {
+InstructionMem :: InstructionMem (std::vector<unsigned int> local_mem) {
         for (int i =0 ; i<local_mem.size(); i++) {
             mem.push_back(local_mem[i]) ; 
         }
     }
     
-int InstructionMem :: getInstruction (int address) {
+unsigned int InstructionMem :: getInstruction (unsigned int address) {
         return mem[address] ; 
     }
 
+
+/****************************************************************************************************** */
+
 DataMem :: DataMem () {
-        for (int i =0 ; i<pow(2,32); i++) {
+        for (int i =0 ; i<1024; i++) {
             mem.push_back(0) ; 
         }
     }
@@ -32,6 +35,14 @@ void DataMem :: setData (int address, int data) {
     }
 
 
+void DataMem::dispData (){
+    for (int i =0 ; i<1024; i=i+4) {
+            std::cout << "Dmem[" << i << "] : "<< this->getData(i)<<std::endl   ; 
+        }
+
+}
+/******************************************************************************************************* */
+
 RegisterFile :: RegisterFile () {
         for (int i =0 ; i<32; i++) {
             mem[i] =0  ; 
@@ -45,3 +56,10 @@ int RegisterFile :: getRegister (int address) {
 void RegisterFile :: setRegister (int address, int data) {
         mem[address] = data ; 
     }
+
+void RegisterFile::dispData (){
+    for (int i =0 ; i<32; i++) {
+            std::cout << "R" << i << " : "<<  mem[i] <<std::endl  ; 
+        }
+
+}

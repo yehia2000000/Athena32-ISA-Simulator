@@ -17,19 +17,32 @@ std::string Disassmbler::Dis_stage (DecodedInstr decoded_instr)
         instr += ", " ; 
         instr += registers[decoded_instr.rt] ;
     }
-    else if ((decoded_instr.opcode>= (int)Op_type:: I_TYPE ) && (decoded_instr.opcode < (int)Op_type:: B_TYPE))
+    else if ((decoded_instr.opcode>= (int)Op_type:: I_TYPE ) && (decoded_instr.opcode < (int)Op_type:: J_TYPE))
     {
-        instr += I_type_op[decoded_instr.opcode -  (int)Op_type:: I_TYPE];
-        instr += ", ";
-        instr += registers[decoded_instr.rd] ;
-        instr += ", " ; 
-        instr += registers[decoded_instr.rs] ;
-        instr += ", " ; 
-        instr += std::to_string(decoded_instr.imm) ;
+        if (decoded_instr.opcode == 4 || decoded_instr.opcode == 5 ) {
+            instr += I_type_op[decoded_instr.opcode -  (int)Op_type:: I_TYPE];
+            instr += " ";
+            instr += registers[decoded_instr.rd] ;
+            instr += ", ";
+            instr += std::to_string(decoded_instr.imm) ;
+            instr += "(";
+            instr += registers[decoded_instr.rs] ;
+            instr += ") ";
+
+        }
+        else {
+            instr += I_type_op[decoded_instr.opcode -  (int)Op_type:: I_TYPE];
+            instr += ", ";
+            instr += registers[decoded_instr.rd] ;
+            instr += ", " ; 
+            instr += registers[decoded_instr.rs] ;
+            instr += ", " ; 
+            instr += std::to_string(decoded_instr.imm) ;
+        }
     }
-    else if ((decoded_instr.opcode>= (int)Op_type:: B_TYPE ) && (decoded_instr.opcode < (int)Op_type:: J_TYPE))
+    else if ((decoded_instr.opcode ==  (int)Op_type:: J_TYPE ))
     {
-        instr += I_type_op[decoded_instr.opcode - (int)Op_type:: B_TYPE];
+        instr += J_TYPE_op[decoded_instr.opcode - (int)Op_type:: J_TYPE];
         instr += ", ";
         instr += registers[decoded_instr.rd] ;
         instr += std::to_string(decoded_instr.imm) ;
@@ -39,9 +52,13 @@ std::string Disassmbler::Dis_stage (DecodedInstr decoded_instr)
         
     }
     else {
-        instr += I_type_op[decoded_instr.opcode - (int)Op_type:: J_TYPE];
+        instr += EX_type_op[decoded_instr.func];
         instr += ", ";
-        instr += std::to_string(decoded_instr.target) ;
+        instr += registers[decoded_instr.rd] ;
+        instr += ", " ; 
+        instr += registers[decoded_instr.rs] ;
+        instr += ", " ; 
+        instr += registers[decoded_instr.rt] ;
     }
 
     return instr ; 

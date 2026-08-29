@@ -7,12 +7,12 @@
 class InstructionMem {
 
     private : 
-    std::vector<int> mem ; 
+    std::vector<unsigned int> mem ; 
 
     public :
-    InstructionMem (std::vector<int> local_mem);
+    InstructionMem (std::vector<unsigned int> local_mem);
     
-    int getInstruction (int address) ; 
+    unsigned int getInstruction (unsigned int address) ; 
 
 };
 
@@ -27,6 +27,8 @@ class DataMem {
 
     void setData (int address, int data) ;
 
+    void dispData (); 
+
 };
 
 class RegisterFile {
@@ -40,6 +42,8 @@ class RegisterFile {
     int getRegister (int address) ;
 
     void setRegister (int address, int data) ;
+
+    void dispData (); 
 };
 
 
