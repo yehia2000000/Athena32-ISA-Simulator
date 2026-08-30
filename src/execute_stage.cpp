@@ -16,6 +16,7 @@ STATE Executer::ExecuteStage (DecodedInstr decode_instr , DataMem *Dmem ,Registe
     STATE Ex_state = STATE::NONE ; 
     int local_rd , local_rt , local_rs ; 
     int local_off , local_data ; 
+    int result ; 
     
     if (decode_instr.opcode == 0 ){ 
         switch (decode_instr.func){
@@ -55,7 +56,7 @@ STATE Executer::ExecuteStage (DecodedInstr decode_instr , DataMem *Dmem ,Registe
             case (int)FUNC_R_TYPE::SLT : 
             local_rs = (*Rmem).getRegister(decode_instr.rs); 
             local_rt = (*Rmem).getRegister(decode_instr.rt); 
-            local_rd = (local_rs > local_rt) ; 
+            local_rd = (local_rs < local_rt) ; 
             (*Rmem).setRegister(decode_instr.rd , local_rd); 
             Ex_state = STATE::DONE ;
             break ; 
@@ -104,20 +105,18 @@ STATE Executer::ExecuteStage (DecodedInstr decode_instr , DataMem *Dmem ,Registe
 
             case  (int)FUNC_I_TYPE::SLTI : 
             local_rs = (*Rmem).getRegister(decode_instr.rs); 
-            local_rd = (local_rs > Executer::SignExtend(local_rs,18)) ; 
+            local_rd = (local_rs < Executer::SignExtend(local_rs,18)) ; 
             (*Rmem).setRegister(decode_instr.rd , local_rd); 
             Ex_state = STATE::DONE ;
             break ; 
 
             case  (int)FUNC_I_TYPE::BEQ : 
+            local_rd = (*Rmem).getRegister(decode_instr.rd); 
             local_rs = (*Rmem).getRegister(decode_instr.rs); 
-            local_rt = (*Rmem).getRegister(decode_instr.rt); 
-            local_rd = (local_rs > local_rt) ; 
-            if (local_rd == 1) {
-                *pc = (*pc + 1) + Executer::SignExtend(decode_instr.imm,18);
-            }
-            else {
-                *pc = (*pc + 1) ;
+            result = (local_rd == local_rs) ; 
+            if (result == 1) {
+                std::cout <<"TAKEN" << std::endl ; 
+                *pc = (*pc) + Executer::SignExtend(decode_instr.imm,18);
             }
             Ex_state = STATE::DONE ;
             break ; 
@@ -126,7 +125,7 @@ STATE Executer::ExecuteStage (DecodedInstr decode_instr , DataMem *Dmem ,Registe
 
     }
     else if  ((decode_instr.opcode== (int)Op_type:: J_TYPE )){
-        *pc = (*pc + 1) + Executer::SignExtend(decode_instr.target,23);
+        *pc = (*pc) + Executer::SignExtend(decode_instr.target,23);
         (*Rmem).setRegister(decode_instr.rd , *pc);
         Ex_state = STATE::DONE ;
 

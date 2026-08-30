@@ -9,6 +9,7 @@ DecodedInstr decode_stage::decode (int instruction ) {
     
     decoded_instr.opcode = (instruction>>OPCODE_SHIFT) & OPCODE_MASK ; 
     
+
     const u8  rd    = (instruction>>RD_SHIFT    )&  RD_MASK;
     const u8  rs    = (instruction>>RS_SHIFT    )&  RS_MASK    ;
     const u8  rt    = (instruction>>RT_SHIFT    )&  RT_MASK    ;

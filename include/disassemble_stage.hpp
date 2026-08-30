@@ -21,7 +21,7 @@ class Disassmbler {
 
 
     std::array<std::string_view, 8> R_type_op = {
-        "ADD", "SUB", "OR", "SLT"
+        "ADD", "SUB","AND", "OR", "SLT"
     };
 
      std::array<std::string_view, 8> EX_type_op = {

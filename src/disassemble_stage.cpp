@@ -10,7 +10,7 @@ std::string Disassmbler::Dis_stage (DecodedInstr decoded_instr)
 
     if (decoded_instr.opcode == 0 ){
         instr += R_type_op[decoded_instr.func];
-        instr += ", ";
+        instr += " ";
         instr += registers[decoded_instr.rd] ;
         instr += ", " ; 
         instr += registers[decoded_instr.rs] ;
