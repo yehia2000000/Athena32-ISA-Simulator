@@ -30,10 +30,9 @@ struct DecodedInstr {
     int rs =0   ; 
     int rt =0 ; 
     int rd =0 ; 
-    int shamt  =0 ; 
     int func = 0 ; 
-    int imm =0  ; 
-    int target =0 ; 
+    int imm :18 =0  ; 
+    int target:23 =0 ; 
 };
 
 class decode_stage {

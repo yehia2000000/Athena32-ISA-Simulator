@@ -29,7 +29,7 @@ class Disassmbler {
     };
 
     std::string Dis_stage (DecodedInstr decoded_instr); 
-
+    static int SignExtendDis (int value , int bit_count); 
 
 };
 

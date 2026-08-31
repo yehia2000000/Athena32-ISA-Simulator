@@ -4,6 +4,13 @@
 #include <array>
 #include "../include/decode_stage.hpp"  
 #include "../include/disassemble_stage.hpp"
+
+int Disassmbler::SignExtendDis (int value , int bit_count)  {
+    int shift = 32 - bit_count;
+    return static_cast<int>(value << shift) >> shift;
+
+}
+
 std::string Disassmbler::Dis_stage (DecodedInstr decoded_instr)
 {
     std:: string instr = ""; 
@@ -45,7 +52,7 @@ std::string Disassmbler::Dis_stage (DecodedInstr decoded_instr)
         instr += J_TYPE_op[decoded_instr.opcode - (int)Op_type:: J_TYPE];
         instr += ", ";
         instr += registers[decoded_instr.rd] ;
-        instr += std::to_string(decoded_instr.imm) ;
+        instr += std::to_string(Disassmbler::SignExtendDis(decoded_instr.imm ,18)) ;
         instr += "(" ; 
         instr += registers[decoded_instr.rs] ;
         instr += ")" ; 
