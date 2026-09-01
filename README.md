@@ -70,6 +70,17 @@ The program covers:
 The first part of the program is listed below. The array is written to
 `MEM[100]` up to `MEM[104]`, and the loop then starts reading it back.
 
+### Build and Run 
+#### Build 
+```
+g++ .\src\main.cpp .\src\decode_stage.cpp .\src\memory.cpp .\src\fetch_stage.cpp .\src\disassemble_stage.cpp .\src\execute_stage.cpp
+
+```
+#### Run 
+```
+.\a.exe
+
+```
 ### Program and Expected results
 
 #### Test case :  
